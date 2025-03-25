@@ -1,16 +1,44 @@
+
 #include "std_lib_facilities.h"
 #include <vector>
 #include "atom.h"
 
-Atom::Atom(char atom, int connections, int charge)
+Carbon::Carbon(int idNum)
 {
-    char atom = atom;
-    int connections = connections;
-    int charge = charge;
+    string id = id + to_string(idNum);
 }
 
-vector Atom::atomProperties()
+
+string Carbon::getId()
 {
-    vector properties = {atom, connections, charge};
-    return properties;
+    return id;
 }
+void Carbon::bindAtom(string id)
+{
+    
+    if (binding1 == false)
+    {
+        binding1 = true;
+        bind1 = id;
+    }
+    else if (binding2 == false)
+    {
+        binding2 = true;
+        bind2 = id;
+    }
+    else if (binding3 == false)
+    {
+        binding3 = true;
+        bind3 = id;
+    }
+    else
+    {
+        binding4 = true;
+        bind4 = id;
+    }
+    
+}
+void Carbon::unbindAtom(string id);
+void Carbon::isBound(string id);
+bool Carbon::isFull();
+
