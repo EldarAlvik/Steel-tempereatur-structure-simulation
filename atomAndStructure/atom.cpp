@@ -13,7 +13,7 @@ string Carbon::getId()
 {
     return id;
 }
-void Carbon::bindAtom(string id)
+bool Carbon::bindAtom(string id)
 {
     
     if (binding1 == false)
@@ -38,7 +38,36 @@ void Carbon::bindAtom(string id)
     }
     
 }
-void Carbon::unbindAtom(string id);
-void Carbon::isBound(string id);
-bool Carbon::isFull();
-
+bool Carbon::unbindAtom(string id)
+{
+    if (id == binds.at(0)) {
+        bind1 = "none";
+        binding1 = true;
+        return true;
+    }
+    else if (id == binds[1]){
+        bind1 = "none";
+        binding2 = true;
+        return true;
+    }
+    else if (id == binds[2]){
+        bind1 = "none";
+        binding3 = true;
+        return true;
+    }
+    else if (id == binds[3]){
+        bind1 = "none";
+        binding4 = true;
+        return true;
+    }
+    else {
+        return ;
+    }
+}
+void Carbon::isBound(string id)
+{
+    
+}
+bool Carbon::isFull(){
+    return full;
+}
