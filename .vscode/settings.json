@@ -5,6 +5,8 @@
     "cmake.configureOnEdit": false,
     "makefile.alwaysPreConfigure": false,
     "files.associations": {
-        "chrono": "cpp"
+        "array": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
