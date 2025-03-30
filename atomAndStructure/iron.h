@@ -4,15 +4,17 @@
 
 
 
-class Carbon : public Coordinates
+
+
+class Iron : public Coordinates
 {
     private:
-        string atomId = "C";
+        string atomId = "Fe";
         bool bound;
         string boundId;
 
     public:
-        Carbon(int id);
+        Iron(int id);
         string getId();
         bool bindGrain(string id);
         bool unbindGrain(string id);
@@ -20,4 +22,3 @@ class Carbon : public Coordinates
         bool isBound();
 
 };
-

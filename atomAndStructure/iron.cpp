@@ -1,9 +1,9 @@
 
 #include "std_lib_facilities.h"
 #include <vector>
-#include "carbon.h"
+#include "iron.h"
 
-Carbon::Carbon(int idNum)
+Iron::Iron(int idNum)
 {
     atomId += to_string(idNum);
     bound = false;
@@ -11,11 +11,11 @@ Carbon::Carbon(int idNum)
 }
 
 
-string Carbon::getId()
+string Iron::getId()
 {
     return atomId;
 }
-bool Carbon::bindGrain(string id)
+bool Iron::bindGrain(string id)
 {
     if (bound == false && boundId != id)
     {
@@ -27,7 +27,7 @@ bool Carbon::bindGrain(string id)
         return false;
     }
 }
-bool Carbon::unbindGrain(string id)
+bool Iron::unbindGrain(string id)
 {
     
     if (bound == true && boundId != id)
@@ -41,7 +41,7 @@ bool Carbon::unbindGrain(string id)
     }
 }
 
-bool Carbon::isBoundTo(string id)
+bool Iron::isBoundTo(string id)
 {
     
     if (boundId == id)
@@ -55,6 +55,6 @@ bool Carbon::isBoundTo(string id)
 
 }
 
-bool Carbon::isBound(){
+bool Iron::isBound(){
     return bound;
 }
