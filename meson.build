@@ -30,7 +30,7 @@ exe = executable(
   src,
 'main.cpp',
 'test.cpp',
-'test.cpp',
+'animation/animation.cpp',
 'atomAndStructure/carbon.cpp',
 'atomAndStructure/coordinates.cpp',
   dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep],
