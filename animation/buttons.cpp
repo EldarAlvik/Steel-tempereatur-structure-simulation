@@ -8,13 +8,11 @@ ClickButton::ClickButton(
     const unsigned int y,
     const unsigned int width,
     const unsigned int height,
-    const string label) :
-    x_loc(x),
-    y_loc(y),
+    const string label):
+    pos(x,y),
     buttonWidth(width),
     buttonHeight(height),
-    buttonLabel(label)
+    buttonLabel(label),
+    button(pos,buttonWidth,buttonHeight,buttonLabel)
 {
-    const TDT4102::Point buttonPosition {x, y};
-    TDT4102::Button button {buttonPosition, y_loc, buttonHeight, buttonLabel};
 }

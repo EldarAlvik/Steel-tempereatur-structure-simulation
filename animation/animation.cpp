@@ -13,11 +13,11 @@ Animation::Animation()
     int windowWidth = 500;
     int windowHeight = 100;
     
-    
-    
     std::string windowTitle = "Steel simulation";
-    ClickButton click1(100,100,100,40,"click meg");
-    click1.button.setCallback(ButtonLogic.testButton());
-    window.add(click1);
+    TDT4102::AnimationWindow window;
 
+    ClickButton click1(100,100,100,40,"click meg");
+    click1.button.setCallback(testButton);
+    window.add(click1.button);
 }
+
