@@ -5,11 +5,11 @@
 class ClickButton
 {
     private:
-        const unsigned int x_loc;
-        const unsigned int y_loc;
+        const TDT4102::Point pos;
         const unsigned int buttonWidth;
         const unsigned int buttonHeight;
         const string buttonLabel;
+        
     public:
         ClickButton(
             const unsigned int x,
@@ -17,6 +17,6 @@ class ClickButton
             const unsigned int width,
             const unsigned int heigth,
             const string label);
-
+        TDT4102::Button button;
 };
 
