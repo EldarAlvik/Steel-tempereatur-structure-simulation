@@ -33,6 +33,8 @@ exe = executable(
 'animation/animation.cpp',
 'atomAndStructure/carbon.cpp',
 'atomAndStructure/coordinates.cpp',
+'atomAndStructure/temperature.cpp',
+'animation/buttonLogic.cpp',
   dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep],
   cpp_args : compiler_flags
 )
