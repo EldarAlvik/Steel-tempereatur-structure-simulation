@@ -5,15 +5,14 @@
 
 Carbon::Carbon(int idNum)
 {
-    atomId += to_string(idNum);
+    aId.setId('C' + to_string(idNum));
     bound = false;
     boundId = "none";
 }
 
-
-string Carbon::getId()
+AtomId Carbon::getId()
 {
-    return atomId;
+    return aId;
 }
 bool Carbon::bindGrain(string id)
 {

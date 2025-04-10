@@ -3,16 +3,16 @@
 #include "temperature.h"
 
 
-Temperature::Temperature(short unsigned int temp)
+Temperature::Temperature(short int temp)
 {
     temperature = temp;
 };
-bool Temperature::setTemperature(short unsigned int temp)
+bool Temperature::setTemperature(short int temp)
 {
     temperature = temp;
     return true;
 };
-short unsigned int Temperature::getTemperature()
+short int Temperature::getTemperature()
 {
     return temperature;
 };

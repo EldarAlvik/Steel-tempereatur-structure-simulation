@@ -1,19 +1,19 @@
 #pragma once
 #include "std_lib_facilities.h"
 #include "coordinates.h"
+#include "atomId.h"
 
 
-
-class Carbon : public Coordinates
+class Carbon : public Coordinates , public AtomId
 {
     private:
-        string atomId = "C";
+        AtomId aId;
         bool bound;
         string boundId;
 
     public:
         Carbon(int id);
-        string getId();
+        AtomId getId();
         bool bindGrain(string id);
         bool unbindGrain(string id);
         bool isBoundTo(string id);

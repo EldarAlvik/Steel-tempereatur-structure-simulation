@@ -6,9 +6,9 @@
 class Temperature
 {
     private:
-        short unsigned int temperature;
+        short int temperature;
     public:
-        Temperature(short unsigned int temp);
-        bool setTemperature(short unsigned int temp);
-        short unsigned int getTemperature();
+        Temperature(short int temp);
+        bool setTemperature(short int temp);
+        short int getTemperature();
 };

@@ -1,14 +1,21 @@
 #pragma once
 #include "std_lib_facilities.h"
 
+
+struct coords{
+    unsigned int x;
+    unsigned int y;
+    string id;
+};
+
 class Coordinates
 {
     private:
-        short unsigned int xCoordinate;
-        short unsigned int yCoordinate;
+        coords coordinates;
 
     public:
+        enum Atom {Iron, Carbon};
         Coordinates();
-        bool setCoordinates(short unsigned int x,short unsigned int y);
-        array<short unsigned int,2 > getCoordinates();
+        bool setCoordinates( unsigned int x, unsigned int y);
+        coords getCoordinates();
 };
