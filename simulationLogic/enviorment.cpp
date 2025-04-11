@@ -1,10 +1,10 @@
 #include "std_lib_facilities.h"
 #include "enviorment.h"
 
-GridCoordinate::GridCoordinate(unsigned int x, unsigned int y): lenx(x), leny(y){
-    grid.resize(lenx);
+GridCoordinate::GridCoordinate(unsigned int x): len(x){
+    grid.resize(len);
     for (auto&& row: grid ){
-        row.resize(leny, nullptr);
+        row.resize(len, nullptr);
     }
 };
 
@@ -14,7 +14,7 @@ GridCoordinate::~GridCoordinate(){
 
 bool GridCoordinate::placeAtom(Coordinates*  atomCoords, unsigned int x, unsigned int y){
     try{
-        if (x >= lenx || y >= leny){
+        if (x >= len || y >= len){
             throw std::out_of_range("Coordinate is out of range");
         }
         if (grid.at(x).at(y) == nullptr){
@@ -23,15 +23,16 @@ bool GridCoordinate::placeAtom(Coordinates*  atomCoords, unsigned int x, unsigne
             return true;
         }
     }
+    
     catch(const std::out_of_range& e){
         cout << "coordinates was out of range" << endl;
         return false;
-}
+}return false;
 };
 
 const Coordinates* GridCoordinate::getAtom(unsigned int x, unsigned int y){
 
-    if (x >= lenx || y >= leny){
+    if (x >= len || y >= len){
         return nullptr;
     }
     if (grid.at(x).at(y) != nullptr){
@@ -44,7 +45,7 @@ const Coordinates* GridCoordinate::getAtom(unsigned int x, unsigned int y){
 
 bool GridCoordinate::moveAtom(unsigned int fx, unsigned int fy,unsigned int tx, unsigned int ty)
 {
-    if ( fx >= lenx || fy >= leny || tx >= lenx || ty >= leny ){
+    if ( fx >= len || fy >= len || tx >= len || ty >= len ){
         return false;
     }
     if(grid.at(fx).at(fy) != nullptr && grid.at(tx).at(ty) == nullptr){
@@ -61,7 +62,7 @@ bool GridCoordinate::moveAtom(unsigned int fx, unsigned int fy,unsigned int tx, 
 
 //burde implementere try catch her
 const bool GridCoordinate::isEmpty(unsigned int x, unsigned int y){
-    if (x >= lenx || y >= leny){
+    if (x >= len || y >= len){
         return false;
     }
     if (grid.at(x).at(y) == nullptr){
@@ -73,16 +74,16 @@ const bool GridCoordinate::isEmpty(unsigned int x, unsigned int y){
 }
 
 const unsigned int GridCoordinate::getGridx(){
-    return lenx;
+    return len;
 }
 const unsigned int GridCoordinate::getGridy(){
-    return leny;
+    return len;
 }
 
-vector<pair<int, int>> GridCoordinate::getNeighbors(unsigned int x, unsigned int y, unsigned int radius = 1){
+vector<pair<int, int>> GridCoordinate::getNeighbors(unsigned int x, unsigned int y, unsigned int radius){
     try
     {
-        if (x >= lenx || y >= leny)
+        if (x >= len || y >= len)
         {
             throw out_of_range("out of range");
         }
@@ -96,11 +97,11 @@ vector<pair<int, int>> GridCoordinate::getNeighbors(unsigned int x, unsigned int
             //i tilfelle verdiene går ut av range når man sjekker naboer,
             // ved minus sjekker man om tallet blir stort pga integer overflow
             
-            if(x+radius >= lenx){
-                xmax = lenx;
+            if(x+radius >= len){
+                xmax = len;
             }
-            if (y+radius >= leny){
-                ymax = leny;
+            if (y+radius >= len){
+                ymax = len;
             }
             if(x-radius >= xmax){
                 xmin = 0;
@@ -109,9 +110,9 @@ vector<pair<int, int>> GridCoordinate::getNeighbors(unsigned int x, unsigned int
                 ymin = 0;
             }
             // i er for x rad j er for y kolonne
-            for (int i = xmin; i < xmax; i++)
+            for (unsigned int i = xmin; i < xmax; i++)
             {
-                for (int j = ymin; j < ymax; j++)
+                for (unsigned int j = ymin; j < ymax; j++)
                 {
                     if (grid.at(i).at(j) != nullptr && grid.at(i).at(j) != grid.at(x).at(y))
                     {

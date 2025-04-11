@@ -1,68 +1,91 @@
 #pragma once
 #include "std_lib_facilities.h"
 #include "coordinates.h"
-#include "atomId.h"
+#include "atom.h"
 
 class Grain{
     private:
     string grainId;
     Coords grainCoords;
-    int grainTemperature;
-    vector<AtomId*>  atomsInGrian;
+    vector<Atom*>  atomsInGrain;
     public:
     Grain();
 
-    string getID();
+    const string getId();
     bool setId(string id);
 
     bool setGrainCoords(unsigned int x,unsigned int y);
-    Coords getGrainCoords(unsigned int x,unsigned int y);
+    const Coords getGrainCoords(unsigned int x,unsigned int y);
 
-    bool setTemperature(int x);
-    int getTemperature();
 
-    virtual string grainType();
+    virtual const char grainType();
 
-    bool addAtom(AtomId* atom);
-    bool removeAtom(AtomId* atom);
-    vector<AtomId*> getAtoms();
+    bool addAtom(Atom* atom);
+    bool removeAtom(Atom* atom);
+    const vector<Atom*> getAtoms();
+    bool setAllGrainAtoms(vector<Atom*>);
+    bool unbindAll();
 
 };
 
-class Liquid
+// IDs L = liquid, A = Austenite, R = aFerrite, M = Martensite, P = pearlite, I = IronCarbide
+class Liquid : public Grain
 {
     private:
-        bool isLiquid;
+        bool meltingPoint;
     public:
-        bool isLiquid();
+        Liquid(int id);
+        const char grainType();
 };
 
 class Austenite : public Grain
 {
     private:
-    int creationTemp;
+    const int creationTemp;
     public:
-    Austenite()
+    Austenite(int id);
+    const char grainType();
 };
 
-class aFerrite
+class AFerrite : public Grain
 {
-
+    private:
+    const int creationTemp;
+    public:
+    AFerrite(int id);
+    const char grainType();
 };
 
-class martensite
+class Martensite : public Grain
 {
-
+    private:
+    const int transformTemp;
+    public:
+    Martensite(int id);
+    const char grainType();
 };
 
-class pearlite
+class Pearlite : public Grain
 {
+    private:
+    const int transformTemp;
 
+    public:
+    Pearlite(int id);
+    const char grainType();
 };
 
-class IronCarbide
+class IronCarbide : public Grain
 {
-
+    private:
+    const int creationTemp;
+    vector<Carbon*>  carbonInGrain;
+    vector<Iron*>  ironInGrain;
+    public:
+    IronCarbide(int id);
+    const char grainType();
+    float ironCarbonRatio();
+    
 };
 
 

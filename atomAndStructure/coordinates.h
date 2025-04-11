@@ -14,7 +14,6 @@ class Coordinates
         Coords coordinates;
 
     public:
-        enum Atom {Iron, Carbon};
         Coordinates();
         bool setCoordinates( unsigned int x, unsigned int y);
         Coords getCoordinates();
