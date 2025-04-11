@@ -1,7 +1,7 @@
 #pragma once
 #include "std_lib_facilities.h"
 #include "atomAndStructure/coordinates.h"
-
+#include "atomAndStructure/grains.h"
 
 class GridCoordinate 
 {
@@ -10,8 +10,8 @@ private:
    unsigned int lenx;
    unsigned int leny;
    
-   map<string, vector<Coordinates*>> grainCoordinate;
-   map<string, string> grainType;
+   map<string, Coordinates*> grainCoordinate; // stores the coordinates to the grain
+   map<string, string> grainType; // stores the type of grain
 public:
    GridCoordinate(unsigned int x, unsigned int y);
    ~GridCoordinate();
@@ -24,6 +24,9 @@ public:
    const unsigned int getGridx();
    const unsigned int getGridy();
 
+   //bool registerGrain(Grain GrainId,  );
+
+   vector<pair<int, int>> getNeighbors(unsigned int x, unsigned int y, unsigned int radius = 1);
 
 
 };  

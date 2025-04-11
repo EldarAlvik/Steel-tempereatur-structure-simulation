@@ -18,7 +18,7 @@ bool Coordinates::setCoordinates(unsigned int x, unsigned int y)
     return true;
 }
 
-coords Coordinates::getCoordinates()
+Coords Coordinates::getCoordinates()
 {
     return coordinates;
 }

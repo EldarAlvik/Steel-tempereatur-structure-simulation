@@ -48,11 +48,10 @@ bool GridCoordinate::moveAtom(unsigned int fx, unsigned int fy,unsigned int tx, 
         return false;
     }
     if(grid.at(fx).at(fy) != nullptr && grid.at(tx).at(ty) == nullptr){
-        Coordinates* atom = grid.at(fx).at(fy);
-        grid.at(tx).at(ty) = atom;
+        Coordinates* tempAtomCoords = grid.at(fx).at(fy);
+        grid.at(tx).at(ty) = tempAtomCoords;
         grid.at(fx).at(fy) = nullptr;
-        atom -> setCoordinates(tx, ty);
-        delete atom;
+        tempAtomCoords -> setCoordinates(tx, ty);
         return true;
     } 
     else {
@@ -68,6 +67,9 @@ const bool GridCoordinate::isEmpty(unsigned int x, unsigned int y){
     if (grid.at(x).at(y) == nullptr){
         return true;
     }
+    else{
+        return false;
+    }
 }
 
 const unsigned int GridCoordinate::getGridx(){
@@ -77,3 +79,56 @@ const unsigned int GridCoordinate::getGridy(){
     return leny;
 }
 
+vector<pair<int, int>> GridCoordinate::getNeighbors(unsigned int x, unsigned int y, unsigned int radius = 1){
+    try
+    {
+        if (x >= lenx || y >= leny)
+        {
+            throw out_of_range("out of range");
+        }
+        if(grid.at(x).at(y) != nullptr)
+        {
+            vector<pair<int, int>> neighbors;
+            unsigned int xmin = x - radius;
+            unsigned int xmax = x + radius;
+            unsigned int ymin = y - radius;
+            unsigned int ymax = y + radius;
+            //i tilfelle verdiene går ut av range når man sjekker naboer,
+            // ved minus sjekker man om tallet blir stort pga integer overflow
+            
+            if(x+radius >= lenx){
+                xmax = lenx;
+            }
+            if (y+radius >= leny){
+                ymax = leny;
+            }
+            if(x-radius >= xmax){
+                xmin = 0;
+            }
+            if(y-radius >= ymax){
+                ymin = 0;
+            }
+            // i er for x rad j er for y kolonne
+            for (int i = xmin; i < xmax; i++)
+            {
+                for (int j = ymin; j < ymax; j++)
+                {
+                    if (grid.at(i).at(j) != nullptr && grid.at(i).at(j) != grid.at(x).at(y))
+                    {
+                        neighbors.push_back(make_pair(i,j));
+                    }
+                    
+                }
+            }
+            return neighbors;
+        }
+        else {
+            return vector<pair<int,int>> ();
+        }
+    }
+    catch(const std::out_of_range& e)
+    {
+        vector<pair<int, int>> error(1,make_pair(-1,-1));
+        return error;
+    }
+}

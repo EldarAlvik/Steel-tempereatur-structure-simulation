@@ -2,7 +2,7 @@
 #include "std_lib_facilities.h"
 
 
-struct coords{
+struct Coords{
     unsigned int x;
     unsigned int y;
     string id;
@@ -11,11 +11,11 @@ struct coords{
 class Coordinates
 {
     private:
-        coords coordinates;
+        Coords coordinates;
 
     public:
         enum Atom {Iron, Carbon};
         Coordinates();
         bool setCoordinates( unsigned int x, unsigned int y);
-        coords getCoordinates();
+        Coords getCoordinates();
 };
