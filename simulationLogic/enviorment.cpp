@@ -61,6 +61,7 @@ bool GridCoordinate::moveAtom(unsigned int fx, unsigned int fy,unsigned int tx, 
     }
 }
 
+
 //burde implementere try catch her
 const bool GridCoordinate::isEmpty(unsigned int x, unsigned int y){
     if (x >= len || y >= len){

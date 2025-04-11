@@ -6,21 +6,24 @@
 #include "enviorment.h"
 #include "formulas.h"
 
-Simulation::Simulation(unsigned int x) : grid(x)
+Simulation::Simulation(unsigned int x) : grid(x), gridLen(x)
 {
+
 };
 
     
 //MARK: initialize Simulation
 
 bool Simulation::initializeAtoms(unsigned int nAtoms,float cPercent){ // creates atoms and adds them to allAtoms
-    if(nAtoms >= round(gridLen*0.90)){
-        nAtoms = round(gridLen*0.90);
+     
+    if(nAtoms >= round(gridLen*gridLen*0.90)){
+        nAtoms = round(gridLen*gridLen*0.90);
     }
     unsigned int nrCarbon = round(nAtoms*cPercent);
     unsigned int nrIron = nAtoms- nrCarbon;
     nrAtoms = nrCarbon + nrIron;
-    cout << "atom numbers set. " << "carbon: " << nrCarbon << " iron:" <<  nrIron <<  "Total: " <<nrCarbon << endl;
+    cout << "atom numbers set. " << "carbon: " << nrCarbon << " iron: " 
+    <<  nrIron <<  "Total: " << nrAtoms << "Possible locations" << gridLen*gridLen << endl;
     allAtoms.reserve(nrAtoms);
     allCarbons.reserve(nrCarbon);
     allIron.reserve(nrIron);
@@ -53,18 +56,21 @@ bool Simulation::initializeAtoms(unsigned int nAtoms,float cPercent){ // creates
     zero.y = 0;
     unsigned int k = 0;
     unsigned int j = 0;
-    for(auto& atom : allAtoms)
-    {
-        if (k < gridLen){
-            grid.placeAtom(atom, k, j);
-            k += 1;
+    for(auto& atom : allAtoms) {
+        if (j >= gridLen) {
+            // Grid is full
+            cout << "Warning: Grid full, not all atoms placed" << endl;
+            break;
         }
-        else if (j < gridLen){
-            grid.placeAtom(atom, k, j);
-            j += 1;
-        }
-        else{ continue;}
         
+        grid.placeAtom(atom, k, j);
+        k++;
+        
+        // When we reach the end of a row, move to next row
+        if (k >= gridLen) {
+            k = 0;
+            j++;
+        }
     }
     cout <<" all atoms palced " << endl;
     return true;
@@ -91,6 +97,9 @@ Coords Simulation::getRandomCoords(){
     return randCoord;
 }
 
+bool Simulation::getRun() const{
+    return run;
+}
 vector<Atom*> Simulation::getAllAtoms() const{
     return allAtoms;
 }
@@ -150,7 +159,7 @@ bool sortFunction(DistCoordGrain a, DistCoordGrain b) {return (a.dist< b.dist); 
 
 //MARK: Simulation function
 bool Simulation::update(){
-    while(!run){
+    while(run){
         
     
     if (temperature < -273){
@@ -185,29 +194,45 @@ bool Simulation::setCoolingRate(CoolingRate a){
 
 
 //MARK: reset simulation
-bool Simulation::clearAtoms(){
+bool Simulation::clearAtoms() {
+    // Clear grid references first
+    grid = GridCoordinate(gridLen);
+    
+    // Then safely delete atoms
     for (auto atom : allAtoms) {
         delete atom;
     }
-    for (auto atom : allCarbons) {
-        delete atom;
-    }
-    for (auto atom : allIron) {
-        delete atom;
-    }
+    
     allAtoms.clear();
     allCarbons.clear();
     allIron.clear();
+    
     return true;
-};
+}
 
-bool Simulation::resetSimulation(){
-    setRun(false);
-    clearAtoms();
-    initializeAtoms(nrAtoms,carbonPercent);
-    cout << "Simulation reset" << endl;
+bool Simulation::resetSimulation() {
+    // Check if atoms are already cleared to avoid double deletion
+    if (!allAtoms.empty()) {
+        clearAtoms();
+    }
+    
+    // Reset all other simulation parameters
+    temperature = 800; // Default temperature
+    carbonPercent = 0.1; // Default carbon percentage
+    
+    grid = GridCoordinate(gridLen);
+
+
+    // Re-initialize atoms with default parameters
+    initializeAtoms(900, 0.1);
+    
     return true;
 }
 //MARK: save / load state
+bool Simulation::addAtom(Atom* atom){
+    allAtoms.push_back(atom);
+    return true;
+}
+
 bool saveState(string filepath){return false;};
 bool loadState(string filepath){return false;};

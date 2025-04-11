@@ -6,14 +6,16 @@
 #include "AnimationWindow.h"
 
 
+// IDs L = liquid, A = Austenite, R = aFerrite, M = Martensite, P = pearlite, I = IronCarbide
+
 
 bool runSimulation(){
     cout << "initiating simulation" << endl;
-    Simulation simulation(1000);
+    Simulation simulation(100);
     Simulation* sim = &simulation;
     
-    int x_offset = 300;
-
+    int x_offset = 302;
+    int y_offset = 5;
     
     cout << "grid initiated " << endl;
     simulation.initializeAtoms(900,0.1);
@@ -31,8 +33,27 @@ bool runSimulation(){
             Coords tempcoord = atom->getCoordinates();
             int x = tempcoord.x;
             int y = tempcoord.y;
-            gSimWindow.draw_circle({x+x_offset,y},10,TDT4102::Color::blue,TDT4102::Color::blue);
+            TDT4102::Color atomColor;
+            string gId = atom->boundBy();
+            if (gId == "L") { // Liquid
+                atomColor = TDT4102::Color::steel_blue;
+            } else if (gId == "A") { // Austenite
+                atomColor = TDT4102::Color::orange_red;
+            } else if (gId == "R") { // aFerrite
+                atomColor = TDT4102::Color::dark_gray;
+            } else if (gId == "M") { // Martensite
+                atomColor = TDT4102::Color::slate_gray;
+            } else if (gId == "P") { // Pearlite
+                atomColor = TDT4102::Color::light_steel_blue;
+            } else if (gId == "I") { // IronCarbide
+                atomColor = TDT4102::Color::dark_blue;
+            } else {
+                atomColor = TDT4102::Color::blue; // Default
+            }
+            
+            gSimWindow.draw_circle({x*10+x_offset,y*10+y_offset},10,atomColor,TDT4102::Color::transparent);
         }
+        // gSimWindow.wait_for(0.5);
         gSimWindow.next_frame();
     }
     return true;

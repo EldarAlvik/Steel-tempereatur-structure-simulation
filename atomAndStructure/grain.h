@@ -28,6 +28,8 @@ class Grain{
 
 };
 
+
+
 // IDs L = liquid, A = Austenite, R = aFerrite, M = Martensite, P = pearlite, I = IronCarbide
 class Liquid : public Grain
 {

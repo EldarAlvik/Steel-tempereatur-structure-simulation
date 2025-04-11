@@ -47,7 +47,7 @@ class Simulation
     float getCarbonPercent();
 
     Coords getRandomCoords();
-
+    bool getRun() const;
     vector<Atom*> getAllAtoms() const;
     //MARK: movement Logic
     bool shouldMove(float temp);
@@ -71,6 +71,7 @@ class Simulation
     bool resetSimulation();
 
     //MARK: save / load state
+    bool addAtom(Atom* atom);
     bool saveState(string filepath);
     bool loadState(string filepath);
 };

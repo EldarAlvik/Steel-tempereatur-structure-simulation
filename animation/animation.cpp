@@ -11,7 +11,7 @@ gSim(simulation),
 
 startSimulation({2,20},155,40,"Start Simulation"),
 pauseSimulation({154,20},155,40,"Pause Simulation"),
-resetSimulation({2,60},306,40,"Stop Simulation"),
+resetSimulation({2,60},306,40,"Reset Simulation"),
 
 saveSimulationInput({2,110},250,40,"Create file name"),
 saveSimulationButton({242, 110}, 65, 40, "Save"),
@@ -50,6 +50,9 @@ statsBox2({152,450},145,200,"")
     startSimulation.setCallback(startSimulationCallback(gSim));
     pauseSimulation.setCallback(pauseSimulationCallback(gSim));
     resetSimulation.setCallback(resetSimulationCallback(gSim));
+
+    saveSimulationButton.setCallback(saveSimulationButtonCallback(gSim));
+    loadSimulationButton.setCallback(loadSimulationButtonCallback(gSim));
 
     add(startSimulation);
     add(pauseSimulation);
