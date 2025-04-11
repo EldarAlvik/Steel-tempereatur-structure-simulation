@@ -3,8 +3,14 @@
 #include "atomAndStructure/grain.h"
 #include "atomAndStructure/atom.h"
 #include "animation/animation.h"
+#include "atomAndStructure/coordinates.h"
+#include "formulas.h"
+#include "enviorment.h"
 
 enum CoolingRate {SLOW , FAST};
+
+struct DistCoordGrain {float dist; Coords coord; string grainId; };
+
 class Simulation
 {
     private:
@@ -23,13 +29,15 @@ class Simulation
 
 
     unsigned int gridLen;
-    
+
+    GridCoordinate grid;
+    //simulation state
+    bool run;
     public:
-    Simulation();
+    Simulation(unsigned int x);
     
     
     //MARK: initialize Simulation
-    bool setGridLimits(unsigned int x);
     bool initializeAtoms(unsigned int nAtoms,float carbonPercent); // creates atoms and adds them to allAtoms
     
 
@@ -40,9 +48,10 @@ class Simulation
 
     Coords getRandomCoords();
 
+    vector<Atom*> getAllAtoms() const;
     //MARK: movement Logic
-
-
+    bool shouldMove(float temp);
+    Coords movementAtom(Atom* a);
     
     
 
@@ -51,13 +60,15 @@ class Simulation
     //MARK: Simulation function
     bool update();
 
+    bool setRun(bool a);
+
     bool setCoolingRate(CoolingRate a);
-
-
+    bool setTemperature(int temp);
 
     //MARK: reset simulation
     bool clearAtoms();
 
+    bool resetSimulation();
 
     //MARK: save / load state
     bool saveState(string filepath);

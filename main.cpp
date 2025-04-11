@@ -7,6 +7,7 @@
 #include "std_lib_facilities.h"
 #include "test.h"
 #include "animation/animation.h"
+#include "simulationControl.h"
 
 //------------------------------------------------------------------------------'
 
@@ -14,7 +15,7 @@
 int main() {
     // Show a nice message in the Terminal window
     //carbonTest();
-    animationTest();
+    runSimulation();
     // This lets the operating system (Windows, Mac, Linux, etc.) know that the program
     // did not encounter any errors
     return 0;

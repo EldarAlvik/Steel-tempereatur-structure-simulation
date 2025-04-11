@@ -31,9 +31,9 @@ void carbonTest()
 
 
 
-void animationTest()
-{
-    cout << "Initated Animation windo" << endl;
-    SimulationWindow ani;
-    cout << "Ended Animation window" << endl;
-}
+// void animationTest()
+// {
+//     cout << "Initated Animation windo" << endl;
+//     SimulationWindow ani;
+//     cout << "Ended Animation window" << endl;
+// }

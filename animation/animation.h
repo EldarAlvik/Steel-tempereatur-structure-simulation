@@ -6,13 +6,17 @@
 #include "widgets/TextInput.h"
 #include "widgets/TextBox.h"
 #include "widgets/DropdownList.h"
+#include "simulationControl.h"
 
+
+class Simulation;
 class SimulationWindow : public TDT4102::AnimationWindow
 {
     private:
+        Simulation* gSim;
         TDT4102::Button startSimulation;
         TDT4102::Button pauseSimulation;
-        TDT4102::Button stopSimulation;
+        TDT4102::Button resetSimulation;
 
         TDT4102::TextInput saveSimulationInput;
         TDT4102::Button saveSimulationButton;
@@ -44,6 +48,6 @@ class SimulationWindow : public TDT4102::AnimationWindow
         TDT4102::TextInput statsBox1;
         TDT4102::TextInput statsBox2;
     public:
-        SimulationWindow();
+        SimulationWindow(Simulation* simulation);
         void run();
 };

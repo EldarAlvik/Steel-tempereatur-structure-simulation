@@ -36,6 +36,7 @@ exe = executable(
   'atomAndStructure/phaseTransformer.cpp',
   'simulationLogic/enviorment.cpp',
   'simulationLogic/simulation.cpp',
+  'simulationControl.cpp',
 'formulas.cpp',
 'main.cpp',
 'simulationControl.cpp',

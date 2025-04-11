@@ -5,7 +5,23 @@
 struct Coords{
     unsigned int x;
     unsigned int y;
-    string id;
+
+    inline Coords operator=(Coords a){
+        x = a.x;
+        y = a.y;
+        return a;
+    }
+    inline Coords operator+(Coords a){
+        return {a.x+x,a.y+y};
+    }
+    inline bool operator==(Coords a){
+        if (a.x == x && a.y == y){
+        return true;}
+        else {
+            return false;
+        }
+    }
+    
 };
 
 class Coordinates

@@ -46,7 +46,7 @@ bool Atom::isBoundTo(string id)
 {
     
     if (boundId == id)
-    {
+    {  
         return true;
     }
     else 
@@ -56,9 +56,15 @@ bool Atom::isBoundTo(string id)
 
 }
 
-bool Atom::isBound(){
+bool Atom::isBound() const {
     return bound;
 }
+
+string Atom::boundBy() const {
+    return boundId;
+}
+
+
 bool Atom::create(){
     bound = false;
     boundId = "none";
@@ -71,6 +77,6 @@ Carbon::Carbon(unsigned int id){
 }
 
 Iron::Iron(unsigned int id){
-    Atom::setId('C'+ to_string(id));
+    Atom::setId('I'+ to_string(id));
     Atom::create();
 }

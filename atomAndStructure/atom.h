@@ -20,7 +20,8 @@ class Atom : public Coordinates
         bool bindGrain(string id);
         bool unbindGrain(string id);
         bool isBoundTo(string id);
-        bool isBound();
+        bool isBound() const;
+        string boundBy() const;
         //for generation
         bool create();
 };

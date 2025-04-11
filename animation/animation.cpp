@@ -6,11 +6,12 @@
 
 vector<string> files {"test.txt","test2.txt"};
 
-SimulationWindow::SimulationWindow() : 
-AnimationWindow(0, 30, 1920, 1080, "Steel simulation" ),
+SimulationWindow::SimulationWindow(Simulation* simulation) : TDT4102::AnimationWindow(0, 30, 1920, 1080, "Steel simulation" ),
+gSim(simulation),
+
 startSimulation({2,20},155,40,"Start Simulation"),
 pauseSimulation({154,20},155,40,"Pause Simulation"),
-stopSimulation({2,60},306,40,"Stop Simulation"),
+resetSimulation({2,60},306,40,"Stop Simulation"),
 
 saveSimulationInput({2,110},250,40,"Create file name"),
 saveSimulationButton({242, 110}, 65, 40, "Save"),
@@ -44,15 +45,15 @@ simPercentTextButton({242, 400}, 60, 40, "Set"),
 statsBox1({2,450},145,200,""),
 statsBox2({152,450},145,200,"")
 {
-    draw_rectangle({0,0},300,1080,TDT4102::Color::dim_gray);
-    draw_rectangle({300,0},(1920-300),1080,TDT4102::Color::gray);
+    
 
-    startSimulation.setCallback(testButton);
-
+    startSimulation.setCallback(startSimulationCallback(gSim));
+    pauseSimulation.setCallback(pauseSimulationCallback(gSim));
+    resetSimulation.setCallback(resetSimulationCallback(gSim));
 
     add(startSimulation);
     add(pauseSimulation);
-    add(stopSimulation);
+    add(resetSimulation);
 
     add(saveSimulationInput);
     add(saveSimulationButton);
@@ -83,7 +84,6 @@ statsBox2({152,450},145,200,"")
 
     add(statsBox1);
     add(statsBox2);
-    wait_for_close();
+    
 }
  
-

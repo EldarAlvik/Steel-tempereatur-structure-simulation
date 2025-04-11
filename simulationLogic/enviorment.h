@@ -6,17 +6,17 @@
 class GridCoordinate 
 {
 private:
-   vector<vector<Coordinates*>> grid;
+   vector<vector<Atom*>> grid;
    unsigned int len;
    
-   map<string, Coordinates*> grainCoordinate; // stores the coordinates to the grain
+   map<string, Atom*> grainCoordinate; // stores the coordinates to the grain
    map<string, string> grainType; // stores the type of grain
 public:
    GridCoordinate(unsigned int x);
    ~GridCoordinate();
 
-   bool placeAtom(Coordinates* atomCoords,unsigned int x, unsigned int y);
-   const Coordinates* getAtom(unsigned int x, unsigned int y);
+   bool placeAtom(Atom* atomCoords,unsigned int x, unsigned int y);
+   const Atom* getAtom(unsigned int x, unsigned int y);
    bool moveAtom(unsigned int fx, unsigned int fy,unsigned int tx, unsigned int ty);  //from x , to x
    const bool isEmpty(unsigned int x, unsigned int y);
 
@@ -24,6 +24,7 @@ public:
    const unsigned int getGridy();
 
    //bool registerGrain(Grain GrainId,  );
-   vector<pair<int, int>> getNeighbors(unsigned int x, unsigned int y, unsigned int radius );
+   vector<pair<int, int>> getNeighbors(Coords a, unsigned int radius );
+   vector<pair<int, int>> getOpenSlot(Coords a, unsigned int radius );
 
 };  

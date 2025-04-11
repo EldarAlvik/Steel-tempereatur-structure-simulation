@@ -7,9 +7,4 @@
 
 
 
-bool runSimulation(){
-    GridCoordinate grid(1000);
-    Simulation sim;
-    SimulationWindow simWindow;
-    return true;
-}
+bool runSimulation();
