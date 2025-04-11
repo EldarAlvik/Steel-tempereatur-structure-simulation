@@ -1,7 +1,7 @@
 #pragma once
 #include "std_lib_facilities.h"
 #include "atomAndStructure/coordinates.h"
-#include "atomAndStructure/grains.h"
+#include "atomAndStructure/grain.h"
 
 class GridCoordinate 
 {
@@ -25,8 +25,6 @@ public:
    const unsigned int getGridy();
 
    //bool registerGrain(Grain GrainId,  );
-
    vector<pair<int, int>> getNeighbors(unsigned int x, unsigned int y, unsigned int radius = 1);
-
 
 };  
