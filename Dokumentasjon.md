@@ -2,6 +2,7 @@
 
 Dette prosjektet er en begynnelse på en 2-dimensjonell implementasjon av en simulator for stål ved forskjellige temperaturer. Planen er å videreutvikle og implementere mer av dette prosjektet fremover.
 
+-Laget av Eldar Alvik
 ---
 
 ## GitHub Link

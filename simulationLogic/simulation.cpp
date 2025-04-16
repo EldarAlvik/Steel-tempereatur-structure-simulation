@@ -120,40 +120,58 @@ bool Simulation::shouldMove(float temp){
 bool sortFunction(DistCoordGrain a, DistCoordGrain b) {return (a.dist< b.dist); };
 
 //skal gi posjisjonen som er nærmest i den største grainen ved siden av
-// Coords Simulation::movementAtom(Atom* a){
-//     Coords currentCoords = a->getCoordinates();
-//     vector<pair<int,int>> neigbhours = grid.getNeighbors(currentCoords, 5);
-//     vector<pair<int,int>> openSlots = grid.getOpenSlot(currentCoords, 5);
-//     vector<DistCoordGrain> neiDCG;
-//     vector<DistCoordGrain> opsDCG;
-//     neiDCG.reserve(neigbhours.size());
-//     for (auto& p : neigbhours){
-//         DistCoordGrain tempDCG;
-//         Coords tempCoord;
-//         tempCoord.x = p.first;
-//         tempCoord.y = p.second;
-//         tempDCG.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,p.first,p.second);
-//         tempDCG.coord = tempCoord;
-//         string grainId;
-//         const Atom* a = grid.getAtom(p.first,p.second);
-//         grainId = a->boundBy();
-//         tempDCG.grainId = grainId;
-//         neiDCG.push_back(tempDCG);
-//     }
-//     sort(neiDCG.begin(),neiDCG.end(), sortFunction);
-//     for (auto& dcg : neiDCG){
+Coords Simulation::movementAtom(Atom* a){
+    Coords currentCoords = a->getCoordinates();
+    vector<pair<int,int>> neigbhours = grid.getNeighbors(currentCoords, 5);
+    vector<pair<int,int>> openSlots = grid.getOpenSlot(currentCoords, 5);
+    vector<DistCoordGrain> neiDCG;
+    vector<DistCoordGrain> opsDCG;
+    neiDCG.reserve(neigbhours.size());
+    //gets distance to nearest atoms and saves their coordinates distance and grain
+    for (auto& p : neigbhours){
+        DistCoordGrain tempDCG;
+        Coords tempCoord;
+        tempCoord.x = p.first;
+        tempCoord.y = p.second;
+        tempDCG.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,p.first,p.second);
+        tempDCG.coord = tempCoord;
+        const Atom* a = grid.getAtom(p.first,p.second);
+        tempDCG.grainId = a->boundBy();
+        neiDCG.push_back(tempDCG);
+    }
+    //sort the dcg for shortest distance to the atoms
+    sort(neiDCG.begin(),neiDCG.end(), sortFunction);
+    for (auto& dcg : neiDCG){
         
-//     }
-//     for (auto& p: openSlots){
-//         DistCoordGrain tempDCG;
-//         Coords tempCoord;
-//         tempCoord.x = p.first;
-//         tempCoord.y = p.second;
-//         tempDCG.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,p.first,p.second);
-//     }
+    }
+    //get open slots nearest to position
+    for (auto& p: openSlots){
+        DistCoordGrain tempDCG;
+        Coords tempCoord;
+        tempCoord.x = p.first;
+        tempCoord.y = p.second;
+        tempDCG.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,p.first,p.second);
+        tempDCG.coord = tempCoord;
+        string grain;
+        vector<DistCoordGrain> toGrainType;
+        
+        // lage en liste over de nærmeste atomonene til hullet
+        for (auto& n: neiDCG){ 
+            DistCoordGrain tempOpenSlots;
+            tempOpenSlots.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,n.coord.x,n.coord.y);
+            const Atom* b = grid.getAtom(n.coord.x,n.coord.y);
+            tempOpenSlots.grainId = b->boundBy();
+            toGrainType.push_back(tempOpenSlots);
+        }
+        sort(toGrainType.begin(), toGrainType.end(), sortFunction);
+
+        //ønsker å ta hensyn til største korn
+    }
     
     
-// }
+
+
+}
 
 
 
