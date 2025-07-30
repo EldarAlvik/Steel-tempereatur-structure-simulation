@@ -119,6 +119,8 @@ bool Simulation::shouldMove(float temp){
 //sort function for distance
 bool sortFunction(DistCoordGrain a, DistCoordGrain b) {return (a.dist< b.dist); };
 
+
+//MARK: Diffusion
 //skal gi posjisjonen som er nærmest i den største grainen ved siden av
 Coords Simulation::movementAtom(Atom* a){
     Coords currentCoords = a->getCoordinates();
@@ -148,8 +150,7 @@ Coords Simulation::movementAtom(Atom* a){
     for (auto& p: openSlots){
         DistCoordGrain tempDCG;
         Coords tempCoord;
-        tempCoord.x = p.first;
-        tempCoord.y = p.second;
+        tempCoord.x = p.first; 
         tempDCG.dist = distanceBetweenTwoPoints(currentCoords.x,currentCoords.y,p.first,p.second);
         tempDCG.coord = tempCoord;
         string grain;
@@ -166,11 +167,12 @@ Coords Simulation::movementAtom(Atom* a){
         sort(toGrainType.begin(), toGrainType.end(), sortFunction);
 
         //ønsker å ta hensyn til største korn
+        
+        Coords null;
+        return null;
     }
     
     
-
-
 }
 
 
